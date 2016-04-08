@@ -1,0 +1,31 @@
+{
+  "name": "scholar-runner",
+  "version": "0.0.1",
+  "description": "NPM command line module for running scholar visual regression tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexnaish/scholar-runner.git"
+  },
+  "keywords": [
+    "scholar",
+    "runner",
+    "module"
+  ],
+  "author": "Alex Naish",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/alexnaish/scholar-runner/issues"
+  },
+  "homepage": "https://github.com/alexnaish/scholar-runner#readme",
+  "dependencies": {
+    "async": "2.0.0-rc.3",
+    "commander": "2.9.0",
+    "lodash.pick": "4.1.1",
+    "node-dir": "0.1.11",
+    "phantom": "2.0.10"
+  }
+}
