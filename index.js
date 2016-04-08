@@ -20,6 +20,6 @@ pipeHelper(function(parsedData){
 
   testHelper(program.directory, program.suite, options.type, function(results){
     options.scenarios = results;
-    require('./runners')[program.browser](options)
+    require('./lib/runners')[program.browser](options)
   });
 });

@@ -58,7 +58,11 @@ var mobileSpecs = [
 		name: 'broadband-mobile-form-error',
 		selector: '.postcode-landline-container',
 		path: '/',
-		windowSize: {width: 480, height: 600}
+		windowSize: {width: 480, height: 600},
+		setup: function() {
+				document.getElementById('landline').className += " error";
+				document.getElementsByClassName('n-button')[0].click()
+		}
 	}
 ];
 
