@@ -26,6 +26,7 @@
     "commander": "2.9.0",
     "lodash.pick": "4.1.1",
     "node-dir": "0.1.11",
-    "phantom": "2.0.10"
+    "phantom": "2.0.10",
+    "request": "2.70.0"
   }
 }
