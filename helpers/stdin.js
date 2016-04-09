@@ -1,11 +1,12 @@
 module.exports = function(callback) {
   var data = '';
   var self = process.stdin;
-  
   self.on('readable', function() {
       var chunk = this.read();
       if (chunk !== null) {
          data += chunk;
+      } else {
+        callback();
       }
   });
   self.on('end', function() {
