@@ -10,7 +10,7 @@ cookie: JS Object containing name, value and domiain. Example = {
 
 module.exports = {
   baseUrl: 'http://web.static.nowtv.com/sales/broadband-checker/e02/dist/',
-  scholarUrl: 'http://hawkeye.nowtv.bskyb.com',
+  scholarUrl: 'http://localhost:8080',
   cookies: [{
     'name': 'ark',
     'value': 'ark',

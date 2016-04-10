@@ -20,14 +20,6 @@ var desktopSpecs = [
 		selector: '.topnav',
 		path: '/'
 	}, {
-		name: 'broadband-header',
-		selector: '.n-header--blue',
-		path: '/'
-	}, {
-		name: 'broadband-form-container',
-		selector: '.postcode-landline-container',
-		path: '/'
-	}, {
 		name: 'broadband-form-error',
 		selector: '.postcode-landline-container',
 		path: '/',

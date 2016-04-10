@@ -18,7 +18,7 @@ pipeHelper(function(parsedData){
   program.data = parsedData;
   var options = pick(program, ['data', 'browser', 'type', 'config']);
 
-  testHelper(program.directory, program.suite, options.type, function(results){
+  testHelper(program.directory, program.suite, program.type, function(results){
     options.scenarios = results;
     require('./lib/runners')[program.browser](options)
   });
