@@ -6,6 +6,9 @@
   "scripts": {
     "test": "test"
   },
+  "bin": {
+    "scholar-runner": "index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexnaish/scholar-runner.git"
@@ -24,6 +27,7 @@
   "dependencies": {
     "async": "2.0.0-rc.3",
     "commander": "2.9.0",
+    "console.table": "0.4.0",
     "lodash.pick": "4.1.1",
     "node-dir": "0.1.11",
     "phantom": "2.0.10",
