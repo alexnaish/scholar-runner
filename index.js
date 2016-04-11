@@ -12,7 +12,7 @@ program
   .option('-b, --browser <option>', 'Define test browser (defaults to "phantomjs")', 'phantomjs')
   .option('-s, --suite <suite>', 'Define file to run (optional)')
   .option('-t, --type <key>', 'Define subset of tests to run (optional)', 'all')
-  .option('-c, --config <filePath>', 'Define config file location (defaults to "process.cwd()/config/scholar.js")', path.join(process.cwd(), 'config', 'scholar.js'))
+  .option('-c, --config <filePath>', 'Define config file location (defaults to "config/scholar.js")', 'config/scholar.js')
   .option('-d, --directory <testDirectory>', 'Define test files directory (defaults to "process.cwd()/test/")', 'test')
   .parse(process.argv);
 

@@ -14,7 +14,7 @@ module.exports = function(directory, suite, subset, callback) {
 
     filteredResults.forEach(function(file){
       specsToRun = specsToRun.concat(require(file)[subset] || []);
-    })
+    });
 
     callback(specsToRun);
   });
