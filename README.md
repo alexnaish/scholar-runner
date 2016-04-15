@@ -108,7 +108,9 @@ There are other possible spec options such as:
 * setupTimeout: Milliseconds to allow page to stabilise after running a setup function (Defaults to 0). 
     * Example = 2000
 * viewportSize: JS Object with width and height properties. 
-    * Example = {width: 1280, height: 720}  
+    * Example = {width: 1280, height: 720}
+* scrollOffset: Integer value to subtract after scrolling to selected element (Defaults to 0). 
+    * Example = 100  
     
 
 ## License
