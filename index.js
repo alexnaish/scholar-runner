@@ -3,6 +3,7 @@
 var program = require('commander');
 var path = require('path');
 var pick = require('lodash.pick');
+var merge = require('lodash.merge');
 var packageJson = require('./package.json');
 var pipeHelper = require('./helpers/stdin');
 var testHelper = require('./helpers/fetchTests');
@@ -20,8 +21,10 @@ program
 
 pipeHelper(function (parsedData) {
     program.data = parsedData;
-    var options = pick(program, ['data', 'browser', 'config', 'browserstack', 'verbose']);
+    var options = pick(program, ['data', 'browser', 'browserstack', 'verbose']);
     testHelper(program.directory, program.suite, program.type, function (results) {
+        var configObject = require(path.join(process.cwd(), program.config));
+        merge(configObject, options.data);
 
         options.scenarios = results;
 
@@ -34,6 +37,6 @@ pipeHelper(function (parsedData) {
 
         console.log(`<<<<<< Runner: ${runner} >>>>>>`);
 
-        require('./lib/runners')[runner](options)
+        require('./lib/runners')[runner](configObject, options)
     });
 });
