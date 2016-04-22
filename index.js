@@ -22,7 +22,7 @@ program
 
 pipeHelper(function (parsedData) {
     program.data = parsedData;
-    var options = pick(program, ['data', 'browser', 'browserstack', 'verbose']);
+    var options = pick(program, ['data', 'browser', 'browserstack', 'verbose', 'seleniumVersion']);
     testHelper(program.directory, program.suite, program.type, function (results) {
         var configObject = require(path.join(process.cwd(), program.config));
         merge(configObject, options.data);
