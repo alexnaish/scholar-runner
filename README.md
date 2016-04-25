@@ -63,6 +63,10 @@ To run on browserstack you will need to:
 * Define the `BROWSERSTACK_USER` environment variable as your browserstack user.
 * Define the `BROWSERSTACK_KEY` environment variable as your browserstack automation key.
 * Add the `--browserstack` flag to the CLI tool.
+* If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however it is easy to setup like:
+    * wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-`YOURENVNAME`-x64.zip && unzip BrowserStackLocal-`YOURENVNAME`-x64.zip
+    * ./BrowserStackLocal -v -onlyAutomate -forcelocal $BROWSERSTACK_KEY &
+  
 
 ## Writing Specs
 
