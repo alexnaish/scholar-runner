@@ -13,7 +13,7 @@ program
     .version(packageJson.version)
     .option('-b, --browser <option>', 'Define test browser (defaults to "phantomjs")', 'phantomjs')
     .option('--browserstack', 'Define whether to use browserstack')
-    .option('--browserstackLocal <bool>', 'Defined browserstack local value (defaults to true', true)
+    .option('--browserstackLocal <bool>', 'Defined browserstack local value (defaults to true)', true)
     .option('--seleniumVersion <version>', 'Optionally use a specific selenium version', '2.53.0')
     .option('--verbose', 'Define selenium log level')
     .option('-s, --suite <suite>', 'Define file to run (optional)')

@@ -4,7 +4,7 @@
   "description": "NPM command line module for running scholar visual regression tests",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "istanbul cover _mocha"
   },
   "bin": {
     "scholar-runner": "index.js"
@@ -36,5 +36,10 @@
     "request": "2.70.0",
     "selenium-standalone": "5.1.0",
     "webdriverio": "4.0.5"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "istanbul": "0.4.3",
+    "sinon": "1.17.3"
   }
 }
