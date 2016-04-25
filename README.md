@@ -58,6 +58,12 @@ Add required cookies to your config file,
     
 ### Browserstack
 
+To run on browserstack you will need to:
+
+* Define the `BROWSERSTACK_USER` environment variable as your browserstack user.
+* Define the `BROWSERSTACK_KEY` environment variable as your browserstack automation key.
+* Add the `--browserstack` flag to the CLI tool.
+
 ## Writing Specs
 
 ### Your first spec file
