@@ -12,17 +12,19 @@ program
     .version(packageJson.version)
     .option('-b, --browser <option>', 'Define test browser (defaults to "phantomjs")', 'phantomjs')
     .option('--browserstack', 'Define whether to use browserstack')
+    .option('--browserstackLocal <bool>', 'Defined browserstack local value (defaults to true', true)
     .option('--seleniumVersion <version>', 'Optionally use a specific selenium version', '2.53.0')
     .option('--verbose', 'Define selenium log level')
     .option('-s, --suite <suite>', 'Define file to run (optional)')
     .option('-t, --type <key>', 'Define subset of tests to run (optional)', 'all')
     .option('-c, --config <filePath>', 'Define config file location (defaults to "config/scholar.js")', 'config/scholar.js')
     .option('-d, --directory <testDirectory>', 'Define test files directory (defaults to "process.cwd()/test/")', 'test')
+    .option('-o, --output <imageDirectory>', 'Define directory to place screenshots (defaults to "process.cwd()/test_images/")', 'test_images')
     .parse(process.argv);
 
 pipeHelper(function (parsedData) {
     program.data = parsedData;
-    var options = pick(program, ['data', 'browser', 'browserstack', 'verbose', 'seleniumVersion']);
+    var options = pick(program, ['data', 'browser', 'browserstack', 'browserstackLocal', 'verbose', 'seleniumVersion', 'output']);
     testHelper(program.directory, program.suite, program.type, function (results) {
         var configObject = require(path.join(process.cwd(), program.config));
         merge(configObject, options.data);
