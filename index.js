@@ -23,14 +23,13 @@ program
     .option('-o, --output <imageDirectory>', 'Define directory to place screenshots (defaults to "process.cwd()/test_images/")', 'test_images')
     .parse(process.argv);
 
-var appConfig;
+var appConfig = require(path.join(process.cwd(), program.config));
 var options;
 
 buildDirectories(program, ['output']);
 pipeHelper(mergeData);
 
 function mergeData(parsedData) {
-    appConfig = require(path.join(process.cwd(), program.config));
     merge(appConfig, parsedData);
     options = pick(program, ['browser', 'browserstack', 'browserstackLocal', 'verbose', 'seleniumVersion', 'output']);
     testHelper(program.directory, program.suite, program.type, generateSpecs);
