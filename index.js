@@ -5,6 +5,7 @@ var path = require('path');
 var pick = require('lodash.pick');
 var merge = require('lodash.merge');
 var packageJson = require('./package.json');
+var buildDirectories = require('./helpers/directories');
 var pipeHelper = require('./helpers/stdin');
 var testHelper = require('./helpers/fetchTests');
 
@@ -22,24 +23,27 @@ program
     .option('-o, --output <imageDirectory>', 'Define directory to place screenshots (defaults to "process.cwd()/test_images/")', 'test_images')
     .parse(process.argv);
 
-pipeHelper(function (parsedData) {
-    program.data = parsedData;
-    var options = pick(program, ['data', 'browser', 'browserstack', 'browserstackLocal', 'verbose', 'seleniumVersion', 'output']);
-    testHelper(program.directory, program.suite, program.type, function (results) {
-        var configObject = require(path.join(process.cwd(), program.config));
-        merge(configObject, options.data);
+var appConfig;
+var options;
 
-        options.scenarios = results;
+buildDirectories(program, ['output']);
+pipeHelper(mergeData);
 
-        var runner = 'local';
-        if (program.browserstack) {
-            runner = 'browserstack';
-        }
+function mergeData(parsedData) {
+    appConfig = require(path.join(process.cwd(), program.config));
+    merge(appConfig, parsedData);
+    options = pick(program, ['browser', 'browserstack', 'browserstackLocal', 'verbose', 'seleniumVersion', 'output']);
+    testHelper(program.directory, program.suite, program.type, generateSpecs);
+}
 
-        if (program.browser === 'phantom') options.browser = 'phantomjs';
+function generateSpecs(testResults) {
+    options.scenarios = testResults;
+    var runner = 'local';
+    if (program.browserstack) {
+        runner = 'browserstack';
+    }
+    if (program.browser === 'phantom') options.browser = 'phantomjs';
 
-        console.log(`<<<<<< Runner: ${runner} >>>>>>`);
-
-        require('./lib/runners')[runner](configObject, options)
-    });
-});
+    console.log(`<<<<<< Runner: ${runner} >>>>>>`);
+    require('./lib/runners')[runner](appConfig, options)
+}

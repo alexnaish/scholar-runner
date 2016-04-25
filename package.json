@@ -31,8 +31,8 @@
     "jimp": "0.2.21",
     "lodash.merge": "4.3.5",
     "lodash.pick": "4.1.1",
+    "mkdirp": "0.5.1",
     "node-dir": "0.1.11",
-    "phantom": "2.0.10",
     "request": "2.70.0",
     "selenium-standalone": "5.1.0",
     "webdriverio": "4.0.5"
