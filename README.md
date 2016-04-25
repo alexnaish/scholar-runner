@@ -17,13 +17,18 @@ This is the client test runner for usage with the [Scholar application](http://g
     
       Options:
     
-        -h, --help                       Output usage information
-        -V, --version                    Output the version number
+        -h, --help                       output usage information
+        -V, --version                    output the version number
         -b, --browser <option>           Define test browser (defaults to "phantomjs")
+        --browserstack                   Define whether to use browserstack
+        --browserstackLocal <bool>       Defined browserstack local value (defaults to true)
+        --seleniumVersion <version>      Optionally use a specific selenium version
+        --verbose                        Define selenium log level
         -s, --suite <suite>              Define file to run (optional)
         -t, --type <key>                 Define subset of tests to run (optional)
-        -c, --config <filePath>          Define config file location (defaults to "process.cwd()/config/scholar.js")
+        -c, --config <filePath>          Define config file location (defaults to "config/scholar.js")
         -d, --directory <testDirectory>  Define test files directory (defaults to "process.cwd()/test/")
+        -o, --output <imageDirectory>    Define directory to place screenshots (defaults to "process.cwd()/test_images/")
 
 ## Setup
 
@@ -37,7 +42,7 @@ Add a config file,
     };
 
 
-### Adding Cookies to Config
+### Adding Global Cookies to Config
 
 Add required cookies to your config file, 
 
@@ -50,6 +55,8 @@ Add required cookies to your config file,
           'domain': '.example.com'
       }]
     };
+    
+### Browserstack
 
 ## Writing Specs
 
@@ -97,6 +104,8 @@ There are other possible spec options such as:
     * Example = "TestHeaderDesktop"
 * selector: CSS Selector to target specific elements. 
     * Example = ".main.header"
+* url: Optional override of the global baseUrl. 
+    * Example = "alternative.domain.testing.com"
 * path: URL path to target page. 
     * Example = "/myTestPage"
 * loadTimeout: Milliseconds to allow page to stabilise before taking a screenshot (Defaults to 2000). 
@@ -109,8 +118,17 @@ There are other possible spec options such as:
     * Example = 2000
 * viewportSize: JS Object with width and height properties. 
     * Example = {width: 1280, height: 720}
-* scrollOffset: Integer value to subtract after scrolling to selected element (Defaults to 0). 
-    * Example = 100  
+* cookies: Same format as the config options, however will only be included for the specific test.
+    * Example = `[
+                    {
+                        name: 'first',
+                        value: 'test'
+                    },
+                    {
+                        name: 'second',
+                        value: 'another'
+                    }
+                ]`
     
 
 ## License
