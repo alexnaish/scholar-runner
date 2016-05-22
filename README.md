@@ -3,7 +3,7 @@ NPM command line module for running visual regression tests
 
 ## Synopsis
 
-This is the client test runner for usage with the [Scholar application](http://github.com/alexnaish/scholar). 
+This is the client test runner for usage with the [Scholar application](http://github.com/alexnaish/scholar).
 
 ## Installation
 
@@ -14,9 +14,9 @@ This is the client test runner for usage with the [Scholar application](http://g
 `scholar-runner --help`
 
     Usage: scholar-runner [options]
-    
+
       Options:
-    
+
         -h, --help                       output usage information
         -V, --version                    output the version number
         -b, --browser <option>           Define test browser (defaults to "phantomjs")
@@ -34,7 +34,7 @@ This is the client test runner for usage with the [Scholar application](http://g
 
 ### Config
 
-Add a config file, 
+Add a config file,
 
     module.exports = {
       baseUrl: 'http://the-website-you-want-to-test.com',
@@ -44,7 +44,7 @@ Add a config file,
 
 ### Adding Global Cookies to Config
 
-Add required cookies to your config file, 
+Add required cookies to your config file,
 
     module.exports = {
       baseUrl: 'http://the-website-you-want-to-test.com',
@@ -55,7 +55,7 @@ Add required cookies to your config file,
           'domain': '.example.com'
       }]
     };
-    
+
 ### Browserstack
 
 To run on browserstack you will need to:
@@ -66,7 +66,7 @@ To run on browserstack you will need to:
 * If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however it is easy to setup like:
     * wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-`YOURENVNAME`-x64.zip && unzip BrowserStackLocal-`YOURENVNAME`-x64.zip
     * ./BrowserStackLocal -v -onlyAutomate -forcelocal $BROWSERSTACK_KEY &
-  
+
 
 ## Writing Specs
 
@@ -86,7 +86,7 @@ Within your test directory (defaults to test/) add your spec file. Ensure the en
             path: '/'
         }
     ];
-    
+
     let otherSpecs = [
         {
             name: 'other-test-1',
@@ -99,34 +99,36 @@ Within your test directory (defaults to test/) add your spec file. Ensure the en
             path: '/'
         }
     ];
-    
+
     module.exports = {
         desktop: desktopSpecs,
         another: otherSpecs,
         all: desktopSpecs.concat(otherSpecs) // default if no --type is provided
     };
- 
+
 ### Advanced Options
 
 There are other possible spec options such as:
 
-* name: String that will be the unique identifier within Scholar. 
+* name: String that will be the unique identifier within Scholar.
     * Example = "TestHeaderDesktop"
-* selector: CSS Selector to target specific elements. 
+* selector: CSS Selector to target specific elements.
     * Example = ".main.header"
-* url: Optional override of the global baseUrl. 
+* url: Optional override of the global baseUrl.
     * Example = "alternative.domain.testing.com"
-* path: URL path to target page. 
+* path: URL path to target page.
     * Example = "/myTestPage"
-* loadTimeout: Milliseconds to allow page to stabilise before taking a screenshot (Defaults to 2000). 
+* labels: An array allowing labelling / tagging of images for use within scholar
+    * Example = ['homepage', 'carousel', 'hero']
+* loadTimeout: Milliseconds to allow page to stabilise before taking a screenshot (Defaults to 2000).
     * Example = 5000
-* setup: function that will be evaluated within the browser to allow events to happen after page loads (click on an accordion heading etc). 
+* setup: function that will be evaluated within the browser to allow events to happen after page loads (click on an accordion heading etc).
     * Example = `function () {
         $('.faq-question-2').click();
     }`
-* setupTimeout: Milliseconds to allow page to stabilise after running a setup function (Defaults to 0). 
+* setupTimeout: Milliseconds to allow page to stabilise after running a setup function (Defaults to 0).
     * Example = 2000
-* viewportSize: JS Object with width and height properties. 
+* viewportSize: JS Object with width and height properties.
     * Example = {width: 1280, height: 720}
 * cookies: Same format as the config options, however will only be included for the specific test.
     * Example = `[
@@ -139,7 +141,7 @@ There are other possible spec options such as:
                         value: 'another'
                     }
                 ]`
-    
+
 
 ## License
 
