@@ -128,6 +128,8 @@ There are other possible spec options such as:
     }`
 * setupTimeout: Milliseconds to allow page to stabilise after running a setup function (Defaults to 0).
     * Example = 2000
+* waitTimeout: Milliseconds to wait for required element to become visible (Defaults to 3000).
+    * Example = 5000
 * viewportSize: JS Object with width and height properties.
     * Example = {width: 1280, height: 720}
 * cookies: Same format as the config options, however will only be included for the specific test.
