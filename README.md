@@ -66,6 +66,37 @@ To run on browserstack you will need to:
 * If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however it is easy to setup like:
     * wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-`YOURENVNAME`-x64.zip && unzip BrowserStackLocal-`YOURENVNAME`-x64.zip
     * ./BrowserStackLocal -v -onlyAutomate -forcelocal $BROWSERSTACK_KEY &
+* If you want more options then pass in 'browserstack' object in your appConfig, which will be used as your browser desiredCapabilities.
+
+
+    {
+        browserstack: {
+            ie: {
+                browser: 'IE',
+                browser_version: '11',
+                os: 'Windows',
+                os_version: '8.1'
+            },
+            edge: {
+                browser: 'Edge',
+                browser_version: '12',
+                os: 'Windows',
+                os_version: '10'
+            },
+            safari: {
+                browser: 'Safari',
+                browser_version: '9.1',
+                os: 'OS X',
+                os_version: 'El Capitan'
+            },
+            chrome: {
+                browser: 'Chrome',
+                browser_version: '47',
+                os: 'Windows',
+                os_version: '7'
+            }
+        }
+    }
 
 
 ## Writing Specs
