@@ -39,5 +39,5 @@ function generateSpecs(testResults) {
     options.scenarios = testResults;
     appConfig.runner = program.browserstack ? 'browserstack' : 'local';
     if (program.browser === 'phantom') options.browser = 'phantomjs';
-    require('./lib/runners')(appConfig, options)
+    require('./lib/runner')(appConfig, options)
 }
