@@ -37,12 +37,7 @@ function mergeData(parsedData) {
 
 function generateSpecs(testResults) {
     options.scenarios = testResults;
-    var runner = 'local';
-    if (program.browserstack) {
-        runner = 'browserstack';
-    }
+    appConfig.runner = program.browserstack ? 'browserstack' : 'local';
     if (program.browser === 'phantom') options.browser = 'phantomjs';
-
-    console.log(`<<<<<< Runner: ${runner} >>>>>>`);
-    require('./lib/runners')[runner](appConfig, options)
+    require('./lib/runner')(appConfig, options)
 }
