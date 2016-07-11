@@ -1,6 +1,6 @@
 {
   "name": "scholar-runner",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "NPM command line module for running scholar visual regression tests",
   "main": "index.js",
   "scripts": {
