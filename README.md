@@ -153,10 +153,10 @@ There are other possible spec options such as:
     * Example = ['homepage', 'carousel', 'hero']
 * loadTimeout: Milliseconds to allow page to stabilise before taking a screenshot (Defaults to 2000).
     * Example = 5000
-* setup: function that will be evaluated within the browser to allow events to happen after page loads (click on an accordion heading etc).
-    * Example = `function () {
-        $('.faq-question-2').click();
-    }`
+* setup: function that will be passed to the runner to allow events to happen after page loads (click on an accordion heading etc). **MUST return the client**
+    * Example = `function(client) {
+        return client.waitForVisible('.n-button', 5000).click('.n-button');
+     }`
 * setupTimeout: Milliseconds to allow page to stabilise after running a setup function (Defaults to 0).
     * Example = 2000
 * waitTimeout: Milliseconds to wait for required element to become visible (Defaults to 3000).
