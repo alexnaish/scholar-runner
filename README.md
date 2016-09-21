@@ -22,6 +22,7 @@ This is the client test runner for usage with the [Scholar application](http://g
         -b, --browser <option>           Define test browser (defaults to "phantomjs")
         --browserstack                   Define whether to use browserstack
         --browserstackLocal <bool>       Defined browserstack local value (defaults to true)
+        -r, --runner <option>            Define the runner for the tests e.g. local, browserstack, remoteSelenium (defaults to "local")
         --seleniumVersion <version>      Optionally use a specific selenium version
         --verbose                        Define selenium log level
         -s, --suite <suite>              Define file to run (optional)
@@ -98,10 +99,26 @@ To run on browserstack you will need to:
         }
     }
 
+### RemoteSelenium
+
+To run on remoteSelenium you will need to define the following in the config:
+
+*   host : the host name for the remoteSelenium server
+*   port : port number for the remoteSelenium server,
+
+For Example:
+   
+    module.exports = {
+          baseUrl: 'http://the-website-you-want-to-test.com',
+          scholarUrl: 'http://your-scholar-instance.com'
+          host: 'localhost',
+          port: '4445'
+    };
 
 ## Writing Specs
 
 ### Your first spec file
+
 
 Within your test directory (defaults to test/) add your spec file. Ensure the ending contains '-spec.js';
 

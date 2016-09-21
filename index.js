@@ -13,6 +13,7 @@ program
     .version(packageJson.version)
     .option('-b, --browser <option>', 'Define test browser (defaults to "phantomjs")', 'phantomjs')
     .option('--browserstack', 'Define whether to use browserstack')
+    .option('-r, --runner <option>', 'Define the runner for the tests e.g. local, browserstack, remoteSelenium (defaults to "local")', 'local')
     .option('--browserstackLocal <bool>', 'Defined browserstack local value (defaults to true)', true)
     .option('--seleniumVersion <version>', 'Optionally use a specific selenium version', '2.53.0')
     .option('--verbose', 'Define selenium log level')
@@ -37,7 +38,8 @@ function mergeData(parsedData) {
 
 function generateSpecs(testResults) {
     options.scenarios = testResults;
-    appConfig.runner = program.browserstack ? 'browserstack' : 'local';
+    if (program.browserstack) appConfig.runner = 'browserstack';
+    if (program.runner) appConfig.runner = program.runner;
     if (program.browser === 'phantom') options.browser = 'phantomjs';
     require('./lib/runner')(appConfig, options)
 }
