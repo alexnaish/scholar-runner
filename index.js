@@ -12,9 +12,7 @@ var testHelper = require('./helpers/fetchTests');
 program
     .version(packageJson.version)
     .option('-b, --browser <option>', 'Define test browser (defaults to "phantomjs")', 'phantomjs')
-    .option('--browserstack', 'Define whether to use browserstack')
-    .option('-r, --runner <option>', 'Define the runner for the tests e.g. local, browserstack, remoteSelenium (defaults to "local")', 'local')
-    .option('--browserstackLocal <bool>', 'Defined browserstack local value (defaults to true)', true)
+    .option('-r, --runner <option>', 'Define the runner for the tests e.g. local, remote (defaults to "local")', 'local')
     .option('--seleniumVersion <version>', 'Optionally use a specific selenium version', '2.53.0')
     .option('--verbose', 'Define selenium log level')
     .option('-s, --suite <suite>', 'Define file to run (optional)')
@@ -32,14 +30,12 @@ pipeHelper(mergeData);
 
 function mergeData(parsedData) {
     merge(appConfig, parsedData);
-    options = pick(program, ['browser', 'browserstack', 'browserstackLocal', 'verbose', 'seleniumVersion', 'output']);
+    options = pick(program, ['browser', 'runner', 'verbose', 'seleniumVersion', 'output']);
     testHelper(program.directory, program.suite, program.type, generateSpecs);
 }
 
 function generateSpecs(testResults) {
     options.scenarios = testResults;
-    if (program.browserstack) appConfig.runner = 'browserstack';
-    if (program.runner) appConfig.runner = program.runner;
     if (program.browser === 'phantom') options.browser = 'phantomjs';
     require('./lib/runner')(appConfig, options)
 }

@@ -20,9 +20,7 @@ This is the client test runner for usage with the [Scholar application](http://g
         -h, --help                       output usage information
         -V, --version                    output the version number
         -b, --browser <option>           Define test browser (defaults to "phantomjs")
-        --browserstack                   Define whether to use browserstack
-        --browserstackLocal <bool>       Defined browserstack local value (defaults to true)
-        -r, --runner <option>            Define the runner for the tests e.g. local, browserstack, remoteSelenium (defaults to "local")
+        -r, --runner <option>            Define the runner for the tests e.g. local, remote (defaults to "local")
         --seleniumVersion <version>      Optionally use a specific selenium version
         --verbose                        Define selenium log level
         -s, --suite <suite>              Define file to run (optional)
@@ -57,21 +55,38 @@ Add required cookies to your config file,
       }]
     };
 
-### Browserstack
+### Remote
+
+To run on a remote Selenium server you will need to:
+
+* Set the runner flag to remote
+* Set the Host (required) and Port number (optional) up in your config
+
+For Example:
+
+    module.exports = {
+          baseUrl: 'http://the-website-you-want-to-test.com',
+          scholarUrl: 'http://your-scholar-instance.com'
+          host: 'http://your-Selenium-server.com',
+          port: 'your-Selenium-server-port'
+    };
+
 
 To run on browserstack you will need to:
 
 * Define the `BROWSERSTACK_USER` environment variable as your browserstack user.
 * Define the `BROWSERSTACK_KEY` environment variable as your browserstack automation key.
-* Add the `--browserstack` flag to the CLI tool.
 * If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however it is easy to setup like:
     * wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-`YOURENVNAME`-x64.zip && unzip BrowserStackLocal-`YOURENVNAME`-x64.zip
     * ./BrowserStackLocal -v -onlyAutomate -forcelocal $BROWSERSTACK_KEY &
-* If you want more options then pass in 'browserstack' object in your appConfig, which will be used as your browser desiredCapabilities.
+* If you want more options then pass in 'browserstack' object in your appConfig, which will be used as your browser desiredCapabilities. 
+* If you need to run browserstack over a local/private connection add 'browserstack.local' : true to the config file 
 
+An Example browserstack config:
 
     {
         browserstack: {
+            'browserstack.local' : true,
             ie: {
                 browser: 'IE',
                 browser_version: '11',
@@ -98,22 +113,6 @@ To run on browserstack you will need to:
             }
         }
     }
-
-### RemoteSelenium
-
-To run on remoteSelenium you will need to define the following in the config:
-
-*   host : the host name for the remoteSelenium server
-*   port : port number for the remoteSelenium server,
-
-For Example:
-   
-    module.exports = {
-          baseUrl: 'http://the-website-you-want-to-test.com',
-          scholarUrl: 'http://your-scholar-instance.com'
-          host: 'localhost',
-          port: '4445'
-    };
 
 ## Writing Specs
 
