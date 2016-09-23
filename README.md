@@ -61,21 +61,25 @@ To run on a remote Selenium server you will need to:
 
 * Set the runner flag to remote
 * Set the Host (required) and Port number (optional) up in your config
+* Set the user variable in config to your Selenium login (optional)
+* Set the key variable in config to your automation key (optional)
 
 For Example:
 
     module.exports = {
           baseUrl: 'http://the-website-you-want-to-test.com',
-          scholarUrl: 'http://your-scholar-instance.com'
+          scholarUrl: 'http://your-scholar-instance.com',
           host: 'http://your-Selenium-server.com',
-          port: 'your-Selenium-server-port'
+          port: 'your-Selenium-server-port',
+          user: 'user-name',
+          key: 'automation-key'
     };
 
 
 To run on browserstack you will need to:
 
-* Define the `browserstack.user` variable as your browserstack user in your config.
-* Define the `browserstack.key` variable as your browserstack automation key in your config.
+* Define the `user` variable as your browserstack user in config.
+* Define the `key` variable as your browserstack automation key in config.
 * If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however it is easy to setup like:
     * wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-`YOURENVNAME`-x64.zip && unzip BrowserStackLocal-`YOURENVNAME`-x64.zip
     * ./BrowserStackLocal -v -onlyAutomate -forcelocal $BROWSERSTACK_KEY &
@@ -85,9 +89,12 @@ To run on browserstack you will need to:
 An Example browserstack config:
 
     {
+        baseUrl: 'http://the-website-you-want-to-test.com',
+        scholarUrl: 'http://your-scholar-instance.com',
+        host: 'hub.browserstack.com',
+        user: 'browserstack-user-name',
+        key: 'browserstack-automation-key',
         browserstack: {
-            user: 'browserstack-user-name',
-            key: 'browserstack-automation-key',
             'browserstack.local' : true,
             ie: {
                 browser: 'IE',
