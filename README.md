@@ -17,18 +17,21 @@ This is the client test runner for usage with the [Scholar application](http://g
 
       Options:
 
-        -h, --help                       output usage information
-        -V, --version                    output the version number
-        -b, --browser <option>           Define test browser (defaults to "phantomjs")
-        --browserstack                   Define whether to use browserstack
-        --browserstackLocal <bool>       Defined browserstack local value (defaults to true)
-        --seleniumVersion <version>      Optionally use a specific selenium version
-        --verbose                        Define selenium log level
-        -s, --suite <suite>              Define file to run (optional)
-        -t, --type <key>                 Define subset of tests to run (optional)
-        -c, --config <filePath>          Define config file location (defaults to "config/scholar.js")
-        -d, --directory <testDirectory>  Define test files directory (defaults to "process.cwd()/test/")
-        -o, --output <imageDirectory>    Define directory to place screenshots (defaults to "process.cwd()/test_images/")
+        -h, --help                                      Output usage information
+        -V, --version                                   Output the version number
+        -b, --browser <option>                          Define test browser (defaults to "phantomjs")
+        --browserstack                                  Define whether to use browserstack
+        --browserstackLocal <bool>                      Defined browserstack local value (defaults to true)
+        --compareLocally                                Define to run the comparison locally (defaults to false)
+        --seleniumVersion <version>                     Optionally use a specific selenium version
+        --verbose                                       Define selenium log level
+        -s, --suite <suite>                             Define file to run (optional)
+        -t, --type <key>                                Define subset of tests to run (optional)
+        -c, --config <filePath>                         Define config file location (defaults to "config/scholar.js")
+        -d, --directory <testDirectory>                 Define test files directory (defaults to "process.cwd()/test/")
+        --baselineDirectory <baselineDirectory>         Define baseline files directory (defaults to "process.cwd()/baselines/")
+        -o, --output <imageDirectory>                   Define directory to place screenshots (defaults to "process.cwd()/test_images/")
+        -r, --testReportDirectory <testReportDirectory> Define directory to place report html (defaults to "process.cwd()/test_images/")
 
 ## Setup
 
