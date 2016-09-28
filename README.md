@@ -16,12 +16,10 @@ This is the client test runner for usage with the [Scholar application](http://g
     Usage: scholar-runner [options]
 
       Options:
-
         -h, --help                                      Output usage information
         -V, --version                                   Output the version number
         -b, --browser <option>                          Define test browser (defaults to "phantomjs")
-        --browserstack                                  Define whether to use browserstack
-        --browserstackLocal <bool>                      Defined browserstack local value (defaults to true)
+        -r, --runner <option>                           Define the runner for the tests e.g. local, remote (defaults to "local")
         --compareLocally                                Define to run the comparison locally (defaults to false)
         --seleniumVersion <version>                     Optionally use a specific selenium version
         --verbose                                       Define selenium log level
@@ -29,15 +27,15 @@ This is the client test runner for usage with the [Scholar application](http://g
         -t, --type <key>                                Define subset of tests to run (optional)
         -c, --config <filePath>                         Define config file location (defaults to "config/scholar.js")
         -d, --directory <testDirectory>                 Define test files directory (defaults to "process.cwd()/test/")
-        --baselineDirectory <baselineDirectory>         Define baseline files directory (defaults to "process.cwd()/baselines/")
         -o, --output <imageDirectory>                   Define directory to place screenshots (defaults to "process.cwd()/test_images/")
         -r, --testReportDirectory <testReportDirectory> Define directory to place report html (defaults to "process.cwd()/test_images/")
+        --baselineDirectory <baselineDirectory>         Define baseline files directory (defaults to "process.cwd()/baselines/")
 
 ## Setup
 
 ### Config
 
-Add a config file,
+The minimum configuration required is:
 
     module.exports = {
       baseUrl: 'http://the-website-you-want-to-test.com',
@@ -59,21 +57,45 @@ Add required cookies to your config file,
       }]
     };
 
-### Browserstack
+### Remote Sessions
 
-To run on browserstack you will need to:
+To run your tests against a remote Selenium server (ie BrowserStack / Saucelabs) you will need to:
 
-* Define the `BROWSERSTACK_USER` environment variable as your browserstack user.
-* Define the `BROWSERSTACK_KEY` environment variable as your browserstack automation key.
-* Add the `--browserstack` flag to the CLI tool.
-* If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however it is easy to setup like:
+* Set the runner flag to remote
+* Set the `host` (required) and `port` number (optional) in your config file.
+* Set the `user` variable in config to your Selenium login (optional).
+* Set the `key` variable in config to your automation key (optional).
+
+For Example:
+
+    module.exports = {
+          baseUrl: 'http://the-website-you-want-to-test.com',
+          scholarUrl: 'http://your-scholar-instance.com',
+          host: 'http://your-Selenium-server.com',
+          port: '1337',
+          user: process.env.USER || 'user-name',
+          key: process.env.SECRET_KEY || 'my-secret-key'
+    };
+
+#### Running on BrowserStack:
+
+* Define the `user` variable as your BrowserStack user in config.
+* Define the `key` variable as your BrowserStack automation key in config.
+* If you want to test somewhere not internet accessible (localhost / internal domain etc) you will need to start up the browserstack local tunnel CLI. It's not included with this package, however the following should help get started:
     * wget https://www.browserstack.com/browserstack-local/BrowserStackLocal-`YOURENVNAME`-x64.zip && unzip BrowserStackLocal-`YOURENVNAME`-x64.zip
     * ./BrowserStackLocal -v -onlyAutomate -forcelocal $BROWSERSTACK_KEY &
-* If you want more options then pass in 'browserstack' object in your appConfig, which will be used as your browser desiredCapabilities.
+* If you are required to run BrowserStack with a local/private connection add `browserstack.local`:`true` to your config file.
 
+An Example browserstack config:
 
     {
+        baseUrl: 'http://the-website-you-want-to-test.com',
+        scholarUrl: 'http://your-scholar-instance.com',
+        host: 'hub.browserstack.com',
+        user: 'browserstack-user-name',
+        key: 'browserstack-automation-key',
         browserstack: {
+            'browserstack.local' : true,
             ie: {
                 browser: 'IE',
                 browser_version: '11',
@@ -101,10 +123,10 @@ To run on browserstack you will need to:
         }
     }
 
-
 ## Writing Specs
 
 ### Your first spec file
+
 
 Within your test directory (defaults to test/) add your spec file. Ensure the ending contains '-spec.js';
 

@@ -41,8 +41,9 @@
     "webdriverio": "4.0.5"
   },
   "devDependencies": {
-    "chai": "3.5.0",
+    "chai": "^3.5.0",
     "istanbul": "0.4.3",
+    "mocha": "^3.1.0",
     "sinon": "1.17.3"
   }
 }
