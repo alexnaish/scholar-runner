@@ -1,21 +1,29 @@
-var dir = require('node-dir');
-var path = require('path');
+'use strict';
+
+const dir = require('node-dir');
+const path = require('path');
+
+function filterBySuite(suite, filePath) {
+  const fileName = path.basename(filePath);
+    console.log("fileName.includes(suite || '')", fileName.includes(suite || ''));
+    console.log("fileName", fileName);
+    return fileName.includes('-spec.js') && fileName.includes(suite || '');
+}
 
 module.exports = function(directory, suite, subset, callback) {
-  dir.files(path.join(process.cwd(), directory), function (err, files) {
-    if (err) throw err;
-    var specsToRun = [];
 
-    function filterBySuite(filePath) {
-      var fileName = path.basename(filePath);
-      return fileName.includes('-spec.js') && fileName.includes(suite || '');
-    }
-    var filteredResults = files.filter(filterBySuite);
+    dir.files(path.join(process.cwd(), directory), (err, files) => {
 
-    filteredResults.forEach(function(file){
-      specsToRun = specsToRun.concat(require(file)[subset] || []);
+        if (err) {
+          throw err;
+        }
+
+        const filteredResults = files
+            .filter(filterBySuite.bind(null, suite))
+            .reduce((acc, file) => {
+                return acc.concat(require(file)[subset] || []);
+            }, []);
+
+        callback(filteredResults);
     });
-
-    callback(specsToRun);
-  });
 };
