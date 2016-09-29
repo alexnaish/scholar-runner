@@ -28,9 +28,9 @@ program
     .parse(process.argv);
 
 const appConfig = require(path.join(process.cwd(), program.config));
-const options;
+let options;
 
-buildDirectories(program, ['output']);
+buildDirectories(program, ['output', 'baselineDirectory']);
 pipeHelper(mergeData);
 
 function mergeData(parsedData) {
