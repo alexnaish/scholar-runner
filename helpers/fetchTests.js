@@ -5,9 +5,7 @@ const path = require('path');
 
 function filterBySuite(suite, filePath) {
   const fileName = path.basename(filePath);
-    console.log("fileName.includes(suite || '')", fileName.includes(suite || ''));
-    console.log("fileName", fileName);
-    return fileName.includes('-spec.js') && fileName.includes(suite || '');
+  return fileName.includes('-spec.js') && fileName.includes(suite || '');
 }
 
 module.exports = function(directory, suite, subset, callback) {

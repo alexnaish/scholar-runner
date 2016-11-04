@@ -16,7 +16,7 @@ program
     .option('-b, --browser <option>', 'Define test browser (defaults to "phantomjs")', 'phantomjs')
     .option('-r, --runner <option>', 'Define the runner for the tests e.g. local, remote (defaults to "local")', 'local')
     .option('--compareLocally', 'Define to run the comparison locally (defaults to false)')
-    .option('--seleniumVersion <version>', 'Optionally use a specific selenium version', '2.53.0')
+    .option('--seleniumVersion <version>', 'Optionally use a specific selenium version', '3.0.1')
     .option('--verbose', 'Define selenium log level')
     .option('-s, --suite <suite>', 'Define file to run (optional)')
     .option('-t, --type <key>', 'Define subset of tests to run (optional)', 'all')
