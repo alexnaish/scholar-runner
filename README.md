@@ -94,27 +94,30 @@ An Example browserstack config:
         host: 'hub.browserstack.com',
         user: 'browserstack-user-name',
         key: 'browserstack-automation-key',
-        browserstack: {
-            'browserstack.local' : true,
+        capabilitiesMap: {
             ie: {
+                'browserstack.local' : true,
                 browser: 'IE',
                 browser_version: '11',
                 os: 'Windows',
                 os_version: '8.1'
             },
             edge: {
+                'browserstack.local' : true,
                 browser: 'Edge',
                 browser_version: '12',
                 os: 'Windows',
                 os_version: '10'
             },
             safari: {
+                'browserstack.local' : true,
                 browser: 'Safari',
                 browser_version: '9.1',
                 os: 'OS X',
                 os_version: 'El Capitan'
             },
             chrome: {
+                'browserstack.local' : true,
                 browser: 'Chrome',
                 browser_version: '47',
                 os: 'Windows',

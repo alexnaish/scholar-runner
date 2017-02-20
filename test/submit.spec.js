@@ -89,16 +89,8 @@ describe('Submit', () => {
         });
     });
 
-    it('should manage errors if API response is invalid', (done) => {
+    it('should manage errors if API response is invalid', () => {
         postStub.yields(null, 500, 'Server unavailable.');
-        try {
-            submit(mockUrl, mockImageResults, (err, results) => {
-                expect(true).to.equal(false, 'Should not have reached callback!');
-                done();
-            });
-        } catch (err) {
-            expect(err).to.be.defined;
-            done();
-        }
+        expect(submit.bind(null, mockUrl, mockImageResults)).to.throw();
     });
 });

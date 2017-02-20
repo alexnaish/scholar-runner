@@ -6,6 +6,7 @@ const program = require('commander');
 const path = require('path');
 const pick = require('lodash.pick');
 const merge = require('lodash.merge');
+
 const packageJson = require('./package.json');
 const buildDirectories = require('./helpers/directories');
 const pipeHelper = require('./helpers/stdin');
@@ -27,14 +28,14 @@ program
     .option('--baselineDirectory <baselineDirectory>', 'Define baseline files directory (defaults to "process.cwd()/baselines/")', 'baselines')
     .parse(process.argv);
 
-const appConfig = require(path.join(process.cwd(), program.config));
+let appConfig = require(path.join(process.cwd(), program.config));
 let options;
 
 buildDirectories(program, ['output', 'baselineDirectory']);
 pipeHelper(mergeData);
 
 function mergeData(parsedData) {
-    merge(appConfig, parsedData);
+    appConfig = Object.assign(appConfig, parsedData);
     options = pick(program, ['browser', 'compareLocally', 'runner', 'verbose', 'seleniumVersion', 'output', 'baselineDirectory', 'testReportDirectory']);
     testHelper(program.directory, program.suite, program.type, generateSpecs);
 }
